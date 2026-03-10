@@ -43,12 +43,12 @@ export default function Navbar({ theme, toggleTheme }) {
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
-          <Link
-            to="/"
-            className="text-base md:text-lg font-bold tracking-tight uppercase font-space text-[var(--text-main)] z-50 relative select-none"
-          >
-            El Solar<span className="text-[var(--text-muted)] font-light mx-1">/</span>
-            <span className="font-light">Creative Group</span>
+          <Link to="/" className="z-50 relative flex items-center">
+            <img
+              src={theme === 'dark' ? '/logo-white.png' : '/logo-blue.png'}
+              alt="El Solar"
+              className="h-7 w-auto"
+            />
           </Link>
 
           {/* Desktop links */}
