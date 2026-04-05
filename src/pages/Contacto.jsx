@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Button from '../components/Button'
+import PageSEO from '../components/PageSEO'
 
 const revenueOptions = {
   COP: [
@@ -77,6 +78,12 @@ export default function Contacto() {
 
   return (
     <div className="pt-32 pb-24">
+      <PageSEO
+        title="Contacto — El Solar Creative Group"
+        description="Agenda tu diagnóstico inteligente gratuito. Cuéntanos tu reto de negocio y evaluamos si podemos ayudarte a construir un sistema de crecimiento estructurado."
+        path="/contacto"
+        ogImage="og-default.png"
+      />
       <section className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left col */}

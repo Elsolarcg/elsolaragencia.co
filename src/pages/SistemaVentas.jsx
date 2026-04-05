@@ -2,31 +2,88 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
 import Button from '../components/Button'
+import VideoHero from '../components/VideoHero'
+import PageSEO from '../components/PageSEO'
 
-const layers = [
+// --- CAPA ICONS (inline SVG, 48x48, stroke line, currentColor) ---
+function IconOferta({ className = '' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 24L24 6l18 18v18H6V24Z" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
+      <path d="M17 42V30h14v12" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="32" cy="15" r="4" stroke="currentColor" strokeWidth="1.75" />
+      <path d="M30 15h4M32 13v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function IconContenido({ className = '' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 6h20a2 2 0 0 1 2 2v32a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" strokeWidth="1.75" />
+      <path d="M18 16h12M18 22h12M18 28h8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <path d="M30 34l4-4-4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function IconData({ className = '' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="28" width="8" height="14" rx="1" stroke="currentColor" strokeWidth="1.75" />
+      <rect x="20" y="18" width="8" height="24" rx="1" stroke="currentColor" strokeWidth="1.75" />
+      <rect x="34" y="8" width="8" height="34" rx="1" stroke="currentColor" strokeWidth="1.75" />
+      <path d="M10 22l10-8 10 6 10-12" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function IconDecision({ className = '' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="14" r="6" stroke="currentColor" strokeWidth="1.75" />
+      <path d="M24 20v6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <path d="M24 26l-8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <path d="M24 26l8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <circle cx="14" cy="38" r="4" stroke="currentColor" strokeWidth="1.75" />
+      <circle cx="34" cy="38" r="4" stroke="currentColor" strokeWidth="1.75" />
+    </svg>
+  )
+}
+
+// --- DATA ---
+const capas = [
   {
     num: '01',
-    title: 'Atracción Calificada',
-    desc: 'Generamos tráfico con intención de compra real. No impresiones. Usamos Google Ads y Meta Ads con estructuras de segmentación por nivel de consciencia del problema, no por intereses genéricos.',
-    tags: ['Google Ads', 'Meta Ads', 'Segmentación por consciencia'],
+    title: 'Oferta',
+    desc: 'Una oferta mal construida no la salva ningún canal ni presupuesto. Auditamos y reconstruimos tu propuesta de valor para que sea irresistible antes de lanzar un solo anuncio.',
+    detail: 'Calculadora de oferta, análisis de precio percibido, posicionamiento vs competencia, garantías y bonos estratégicos.',
+    Icon: IconOferta,
+    accent: 'text-amber-400 bg-amber-400/10 border-amber-400/20',
   },
   {
     num: '02',
-    title: 'Conversión con Fricción Cero',
-    desc: 'Cada punto de contacto está diseñado para reducir la resistencia a la acción. Páginas de aterrizaje que hablan el idioma del cliente en el momento exacto donde está en su proceso de decisión.',
-    tags: ['Landing pages', 'CRO', 'Arquitectura de mensajes'],
+    title: 'Contenido',
+    desc: 'El contenido que vende no es creativo genérico. Es arquitectura de mensajes calibrada al nivel de consciencia exacto del comprador en cada etapa del embudo.',
+    detail: 'Librería de hooks, copies para ads y landing pages, guiones de video, email sequences, creatividades estáticas y en movimiento.',
+    Icon: IconContenido,
+    accent: 'text-blue-400 bg-blue-400/10 border-blue-400/20',
   },
   {
     num: '03',
-    title: 'Nutrición Automatizada',
-    desc: 'El 80% de los leads no compran en el primer contacto. Construimos secuencias de email y retargeting que educan, generan confianza y empujan al cierre sin intervención manual constante.',
-    tags: ['Email marketing', 'Retargeting', 'Automatización'],
+    title: 'Data',
+    desc: 'Sin tracking completo, cada decisión de presupuesto es una apuesta. Instalamos la infraestructura de datos que convierte métricas en decisiones rentables.',
+    detail: 'Pixel + CAPI, Google Tag Manager, dashboards de KPIs, atribución de conversiones, alertas automáticas por anomalías.',
+    Icon: IconData,
+    accent: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
   },
   {
     num: '04',
-    title: 'Datos e Inteligencia Continua',
-    desc: 'Sin datos precisos, cada decisión es una apuesta. Instalamos tracking completo, dashboards en tiempo real y ciclos de optimización cada 14 días para que el sistema mejore solo.',
-    tags: ['Analytics', 'Dashboards', 'Optimización iterativa'],
+    title: 'Decisión',
+    desc: 'Los datos sin interpretación no sirven. La IA analiza el rendimiento, detecta fricciones y genera recomendaciones de acción — nosotros las ejecutamos en ciclos de 14 días.',
+    detail: 'Análisis automatizado, hipótesis de optimización, ciclos de A/B test, escalamiento predictivo, reportes ejecutivos mensuales.',
+    Icon: IconDecision,
+    accent: 'text-violet-400 bg-violet-400/10 border-violet-400/20',
   },
 ]
 
@@ -74,102 +131,111 @@ const iaRoles = [
 
 export default function SistemaVentas() {
   return (
-    <div className="pt-32 pb-24">
-      {/* Hero */}
-      <section className="container mx-auto px-6 mb-24">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl"
-        >
-          <span className="block text-[10px] font-bold tracking-[0.22em] text-[var(--text-muted)] mb-6 uppercase">
-            Sistema Inteligente de Ventas
-          </span>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-[var(--text-main)] font-space mb-8 text-balance">
-            Un sistema que vende<br />
-            <span className="text-[var(--text-muted)]">mientras tú operas.</span>
-          </h1>
-          <p className="text-lg text-[var(--text-muted)] leading-relaxed max-w-2xl">
-            No es una campaña. Es una arquitectura completa de adquisición de clientes que conecta tráfico, conversión, nutrición y datos en un flujo automatizado y medible.
-          </p>
-        </motion.div>
-      </section>
+    <div className="pb-24">
+      <PageSEO
+        title="Sistema Inteligente de Ventas B2B — El Solar Creative Group"
+        description="Convierte tu proceso comercial en un sistema predecible. Diagnóstico, calificación automática y seguimiento con IA para empresas B2B en Latinoamérica."
+        path="/sistema-inteligente-ventas"
+        ogImage="og-siv.png"
+      />
 
-      {/* Para quién */}
-      <section className="container mx-auto px-6 mb-28">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <SectionHeading subtitle="Perfil de cliente">
-            Diseñado para<br />
-            <span className="text-[var(--text-muted)]">negocios con tracción</span>
-          </SectionHeading>
-          <div className="space-y-6 pt-4">
-            {[
-              'Tiendas e-commerce con facturación entre 50M–500M COP/mes que quieren crecer sin depender de un solo canal.',
-              'Negocios con producto validado pero adquisición de clientes caótica, dependiente de voz a voz o referidos.',
-              'Fundadores que invierten en ads y no entienden por qué el ROAS no justifica el gasto.',
-              'Empresas que crecieron orgánicamente y ahora necesitan sistematizar para escalar sin contratar 5 personas más.',
-            ].map((text, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex gap-4"
-              >
-                <span className="text-[var(--accent-blue)] font-mono text-sm mt-1 shrink-0">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <p className="text-[var(--text-muted)] leading-relaxed">{text}</p>
-              </motion.div>
-            ))}
+      {/* Hero — video background */}
+      <VideoHero
+        videoSrc="/assets/videos/siv/hero/hero-siv.mp4"
+        videoSrcWebm="/assets/videos/siv/hero/hero-siv.webm"
+        eyebrow="Sistema Inteligente de Ventas"
+        heading={<>Un sistema que vende<br /><span className="font-light opacity-70">mientras tú creces.</span></>}
+        subheading="No es una campaña. Es una arquitectura completa de adquisición de clientes que conecta oferta, contenido, data y decisión en un flujo automatizado y medible."
+        ctaLabel="Tu Diagnóstico Inteligente — Fase 1 Gratis"
+        ctaTo="/contacto"
+      />
+
+      {/* Para quién — fondo secundario */}
+      <section className="bg-[var(--bg-secondary)] py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <SectionHeading subtitle="Perfil de cliente">
+              Diseñado para<br />
+              <span className="text-[var(--text-muted)]">negocios con tracción</span>
+            </SectionHeading>
+            <div className="space-y-6 pt-4">
+              {[
+                'Tiendas e-commerce con facturación entre 50M–500M COP/mes que quieren crecer sin depender de un solo canal.',
+                'Negocios con producto validado pero adquisición de clientes caótica, dependiente de voz a voz o referidos.',
+                'Fundadores que invierten en ads y no entienden por qué el ROAS no justifica el gasto.',
+                'Empresas que crecieron orgánicamente y ahora necesitan sistematizar para escalar sin contratar 5 personas más.',
+              ].map((text, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="flex gap-4"
+                >
+                  <span className="text-[var(--accent-blue)] font-mono text-sm mt-1 shrink-0">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p className="text-[var(--text-muted)] leading-relaxed">{text}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Las 4 capas */}
-      <section className="container mx-auto px-6 mb-28">
-        <SectionHeading subtitle="Arquitectura del sistema">
-          Las 4 capas del<br />
-          <span className="text-[var(--text-muted)]">Sistema de Ventas</span>
-        </SectionHeading>
-        <div className="space-y-4">
-          {layers.map((layer, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="card-depth p-8 grid md:grid-cols-[80px_1fr_auto] gap-6 items-start"
-            >
-              <span className="font-mono text-4xl font-light text-[var(--text-muted)] opacity-40">
-                {layer.num}
-              </span>
-              <div>
-                <h3 className="text-xl font-medium text-[var(--text-main)] mb-3 font-space">
-                  {layer.title}
-                </h3>
-                <p className="text-[var(--text-muted)] leading-relaxed mb-4">{layer.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {layer.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] tracking-[0.15em] uppercase px-3 py-1 border border-[var(--border-color)] text-[var(--text-muted)]"
-                    >
-                      {tag}
+      {/* Las 4 capas — fondo principal */}
+      <section className="bg-[var(--bg-main)] py-24">
+        <div className="container mx-auto px-6">
+          <SectionHeading subtitle="Arquitectura del sistema">
+            Las 4 capas del<br />
+            <span className="text-[var(--text-muted)]">Sistema de Ventas</span>
+          </SectionHeading>
+          <div className="grid md:grid-cols-2 gap-5">
+            {capas.map((capa, i) => {
+              const { Icon } = capa
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.55, delay: i * 0.1 }}
+                  className="card-depth p-8 flex flex-col gap-5"
+                >
+                  {/* Icon + number */}
+                  <div className="flex items-start justify-between">
+                    <div className={`w-14 h-14 rounded-sm border flex items-center justify-center shrink-0 ${capa.accent}`}>
+                      <Icon className="w-7 h-7" />
+                    </div>
+                    <span className="font-mono text-4xl font-light text-[var(--text-muted)] opacity-20">
+                      {capa.num}
                     </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                  </div>
+
+                  {/* Title + desc */}
+                  <div>
+                    <h3 className="text-xl font-medium text-[var(--text-main)] font-space mb-3">
+                      {capa.title}
+                    </h3>
+                    <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+                      {capa.desc}
+                    </p>
+                  </div>
+
+                  {/* Detail pill */}
+                  <div className="pt-4 border-t border-[var(--border-color)]">
+                    <p className="text-xs text-[var(--text-muted)] leading-relaxed">{capa.detail}</p>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      {/* 5 niveles de consciencia */}
-      <section className="bg-[var(--bg-section)] py-24 mb-28">
+      {/* 5 niveles de consciencia — fondo secundario */}
+      <section className="bg-[var(--bg-secondary)] py-24">
         <div className="container mx-auto px-6">
           <SectionHeading subtitle="Framework de mensajes">
             5 niveles de consciencia<br />
@@ -179,7 +245,6 @@ export default function SistemaVentas() {
             La mayoría de campañas fallan porque hablan en el nivel incorrecto. Cada mensaje que producimos está calibrado al momento exacto donde está el cliente en su proceso de decisión.
           </p>
           <div className="relative">
-            {/* Línea vertical */}
             <div className="absolute left-[11px] top-2 bottom-2 w-px bg-[var(--border-color)] hidden md:block" />
             <div className="space-y-6">
               {awareness.map((item, i) => (
@@ -210,55 +275,60 @@ export default function SistemaVentas() {
         </div>
       </section>
 
-      {/* Rol de la IA */}
-      <section className="container mx-auto px-6 mb-28">
-        <SectionHeading subtitle="Ventaja tecnológica">
-          Lo que la IA hace<br />
-          <span className="text-[var(--text-muted)]">que otros no pueden</span>
-        </SectionHeading>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {iaRoles.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="card-depth p-6"
-            >
-              <div className="w-8 h-px bg-[var(--accent-blue)] mb-4" />
-              <h4 className="text-sm font-medium text-[var(--text-main)] mb-2 font-space">
-                {item.title}
-              </h4>
-              <p className="text-xs text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
+      {/* Rol de la IA — fondo principal */}
+      <section className="bg-[var(--bg-main)] py-24">
+        <div className="container mx-auto px-6">
+          <SectionHeading subtitle="Ventaja tecnológica">
+            Lo que la IA hace<br />
+            <span className="text-[var(--text-muted)]">que otros no pueden</span>
+          </SectionHeading>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {iaRoles.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="card-depth p-6"
+              >
+                <div className="w-8 h-px bg-[var(--accent-blue)] mb-4" />
+                <h4 className="text-sm font-medium text-[var(--text-main)] mb-2 font-space">
+                  {item.title}
+                </h4>
+                <p className="text-xs text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="card-depth p-12 md:p-16 text-center max-w-3xl mx-auto"
-        >
-          <span className="block text-[10px] font-bold tracking-[0.22em] text-[var(--text-muted)] mb-6 uppercase">
-            Siguiente paso
-          </span>
-          <h2 className="text-3xl md:text-4xl font-light font-space text-[var(--text-main)] mb-6 text-balance">
-            ¿Tu modelo necesita este sistema?
-          </h2>
-          <p className="text-[var(--text-muted)] mb-10 leading-relaxed">
-            Hacemos una auditoría de fricción operativa de 45 minutos. Identificamos dónde se está perdiendo el dinero y si tiene sentido trabajar juntos.
-          </p>
-          <Link to="/contacto">
-            <Button primary>Solicitar Auditoría</Button>
-          </Link>
-        </motion.div>
+      {/* CTA — fondo secundario */}
+      <section className="bg-[var(--bg-secondary)] py-24">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="card-depth p-12 md:p-16 text-center max-w-3xl mx-auto"
+          >
+            <span className="block text-[10px] font-bold tracking-[0.22em] text-[var(--text-muted)] mb-6 uppercase">
+              Siguiente paso
+            </span>
+            <h2 className="text-3xl md:text-4xl font-light font-space text-[var(--text-main)] mb-6 text-balance">
+              ¿Tu modelo necesita este sistema?
+            </h2>
+            <p className="text-[var(--text-muted)] mb-10 leading-relaxed">
+              Hacemos una auditoría de fricción operativa de 45 minutos. Identificamos dónde se está perdiendo el dinero y si tiene sentido trabajar juntos.
+            </p>
+            <Link to="/contacto">
+              <Button primary>Tu Diagnóstico Inteligente — Fase 1 Gratis</Button>
+            </Link>
+          </motion.div>
+        </div>
       </section>
+
     </div>
   )
 }

@@ -1,74 +1,10 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, X, ChevronDown, BarChart3, Brain, Zap, Layers } from 'lucide-react'
+import { ArrowRight, Check, X, BarChart3, Brain, Zap } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 import Button from '../components/Button'
-
-// --- HERO ---
-function Hero() {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
-      <div className="absolute inset-0 hero-gradient" />
-
-      <div className="container mx-auto px-6 relative z-10 text-center">
-        <motion.p
-          initial={{ opacity: 0, letterSpacing: '0.5em' }}
-          animate={{ opacity: 1, letterSpacing: '0.22em' }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-          className="text-[10px] md:text-xs text-[var(--text-muted)] uppercase tracking-[0.22em] mb-8"
-        >
-          No vendemos servicios. Vendemos orden.
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl lg:text-[5.5rem] font-light leading-[1.05] mb-8 font-space tracking-tight text-balance"
-        >
-          Deja de presentar resultados.{' '}
-          <br className="hidden md:block" />
-          <span className="font-medium text-[var(--text-main)]">
-            Empieza a tomar decisiones.
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="max-w-lg mx-auto text-[var(--text-muted)] text-lg mb-12 font-light leading-relaxed"
-        >
-          Diseñamos sistemas que convierten ruido operativo en decisiones claras.
-          No trabajamos con quien busca atajos.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col md:flex-row gap-6 justify-center items-center"
-        >
-          <Link to="/contacto">
-            <Button primary>Explorar Fit</Button>
-          </Link>
-          <span className="text-[10px] text-[var(--text-muted)] tracking-widest uppercase flex items-center gap-2">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            Proceso de selección activo
-          </span>
-        </motion.div>
-      </div>
-
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--text-muted)]"
-      >
-        <ChevronDown size={22} />
-      </motion.div>
-    </section>
-  )
-}
+import PageSEO from '../components/PageSEO'
+import HeroEstadoCero from '../components/HeroEstadoCero/HeroEstadoCero'
 
 // --- REFRAME ---
 function Reframe() {
@@ -78,12 +14,13 @@ function Reframe() {
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>
             <SectionHeading subtitle="El Problema Real">
-              Tu empresa no necesita más marketing.
+              Tu negocio es un organismo. Cada sistema está conectado.
             </SectionHeading>
             <p className="text-xl text-[var(--text-muted)] leading-relaxed font-light mb-8">
-              No falta talento ni herramientas. Falta sistema.
-              Hoy, tu marketing, ventas y operaciones operan como islas separadas
-              y las decisiones se toman por suposición, no por datos.
+              Marketing, ventas, operaciones y datos son los sistemas vitales de tu negocio.
+              Cuando operan desconectados, las decisiones se toman por suposición. Cuando están
+              alineados con inteligencia artificial y análisis de datos, todo se vuelve predecible:
+              las ventas escalan, las operaciones fluyen y el crecimiento deja de ser reactivo.
             </p>
             <div className="p-8 border-l-2 border-[var(--border-color)] bg-[var(--accent-glow)]">
               <h4 className="text-[var(--text-main)] text-sm font-semibold mb-3 uppercase tracking-widest">
@@ -122,16 +59,16 @@ function Reframe() {
 // --- METHODOLOGY ---
 const steps = [
   {
-    title: 'Lectura Profunda',
-    subtitle: 'Diagnóstico con métricas reales, no checklist.',
+    title: 'Sondeo de Salud y Sistemas',
+    subtitle: 'Diagnóstico profundo del estado actual de cada sistema vital de tu negocio. No es un checklist: es una lectura real de la salud de tus ventas, marketing, operaciones y datos.',
     bullets: [
       'Identificación de cuellos de botella invisibles.',
       'Insights que cambian decisiones, no reportes de vanidad.',
     ],
   },
   {
-    title: 'Organización Estructural',
-    subtitle: 'Dashboards vivos + activos de información.',
+    title: 'Arquitectura de Datos',
+    subtitle: 'Construcción de la infraestructura de datos que conecta todos los sistemas. Dashboards vivos, flujos de información unificados y la base sobre la cual la IA opera.',
     bullets: [
       'Arquitectura de datos unificada.',
       'Eliminación de silos entre marketing, ventas y operaciones.',
@@ -146,8 +83,8 @@ const steps = [
     ],
   },
   {
-    title: 'Integración de IA',
-    subtitle: 'IA para pensar, no solo automatizar.',
+    title: 'Análisis Científico',
+    subtitle: 'Modelos predictivos, machine learning y análisis de datos avanzado para convertir información en predicción. La IA ya estaba presente desde el paso 1 — aquí es donde la ciencia de datos potencia cada decisión.',
     bullets: [
       'Modelos que amplifican el criterio del equipo.',
       'Automatización de tareas de bajo valor cognitivo.',
@@ -248,32 +185,16 @@ const systems = [
   },
   {
     icon: Brain,
-    title: 'Cultura IA',
-    tag: 'Equipos y operaciones',
-    to: '/cultura-ia',
-    problems: [
-      'Prompts sueltos sin integración real al negocio.',
-      'Productividad artificial que no escala.',
-      'Resistencia al cambio por falta de criterio colectivo.',
-    ],
-    solutions: [
-      'IA integrada al pensamiento estratégico del equipo.',
-      'Criterio colectivo para decidir qué automatizar.',
-      'Proyección asistida con modelos reales del negocio.',
-    ],
-  },
-  {
-    icon: Layers,
-    title: 'Growth OS',
+    title: 'Growth OS con IA',
     tag: 'Sistema completo',
-    to: '/sistema-inteligente-ventas',
+    to: '/cultura-ia',
     problems: [
       'Caos operativo al intentar escalar.',
       'Tácticas cortoplacistas sin horizonte claro.',
-      'Fracturas entre equipos y objetivos.',
+      'Decisiones basadas en suposición, no en datos.',
     ],
     solutions: [
-      'Claridad absoluta sobre qué ejecutar y cuándo.',
+      'Ecosistema de IA transversal desde el día cero.',
       'Decisiones basadas en datos, no en urgencias.',
       'Arquitectura de crecimiento a largo plazo.',
     ],
@@ -341,7 +262,7 @@ function Systems() {
           <span className="text-[var(--text-muted)]">Imposibles de comparar por precio.</span>
         </SectionHeading>
 
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div className="grid md:grid-cols-3 gap-5">
           {systems.map((s, i) => (
             <SystemCard key={i} {...s} />
           ))}
@@ -373,7 +294,7 @@ function Systems() {
               to="/contacto"
               className="flex-shrink-0 px-8 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-[10px] font-bold uppercase tracking-[0.18em] hover:opacity-85 transition-opacity whitespace-nowrap"
             >
-              Solicitar Auditoría
+              Tu Diagnóstico Inteligente — Fase 1 Gratis
             </Link>
           </div>
         </motion.div>
@@ -440,7 +361,13 @@ function TheFilter() {
 export default function Home() {
   return (
     <>
-      <Hero />
+      <PageSEO
+        title="El Solar Creative Group — Sistemas de Crecimiento Estructurado"
+        description="Diseñamos sistemas que convierten ruido operativo en decisiones claras. Sistema Inteligente de Ventas B2B, Estrategia Creativa y Cultura IA para empresas en Latinoamérica."
+        path="/"
+        ogImage="og-home.png"
+      />
+      <HeroEstadoCero />
       <Reframe />
       <Methodology />
       <Systems />

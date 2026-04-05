@@ -5,9 +5,10 @@ import { Menu, X } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
 
 const links = [
-  { label: 'Sistema de Ventas', to: '/sistema-inteligente-ventas' },
+  { label: 'Inicio', to: '/' },
+  { label: 'Sistema Inteligente de Ventas', to: '/sistema-inteligente-ventas' },
   { label: 'Estrategia Creativa', to: '/estrategia-creativa' },
-  { label: 'Cultura IA', to: '/cultura-ia' },
+  { label: 'Growth OS con IA', to: '/cultura-ia' },
   { label: 'Quiénes Somos', to: '/quienes-somos' },
 ]
 
@@ -45,7 +46,7 @@ export default function Navbar({ theme, toggleTheme }) {
           {/* Logo */}
           <Link to="/" className="z-50 relative flex items-center">
             <img
-              src={theme === 'dark' ? '/logo-white.png' : '/logo-blue.png'}
+              src={theme === 'dark' ? '/assets/images/global/logo/logo-light.svg' : '/assets/images/global/logo/logo-dark.svg'}
               alt="El Solar"
               className="h-7 w-auto"
             />
@@ -71,7 +72,7 @@ export default function Navbar({ theme, toggleTheme }) {
               to="/contacto"
               className="hidden md:flex items-center px-5 py-2 text-[10px] tracking-[0.18em] uppercase font-medium bg-[var(--button-bg)] text-[var(--button-text)] hover:opacity-85 transition-opacity duration-200"
             >
-              Explorar Fit
+              Tu Diagnóstico Inteligente
             </Link>
             <button
               onClick={toggleMenu}
@@ -104,7 +105,7 @@ export default function Navbar({ theme, toggleTheme }) {
           to="/contacto"
           className="mt-4 text-3xl font-light font-space text-[var(--text-main)]"
         >
-          Explorar Fit
+          Tu Diagnóstico Inteligente
         </Link>
       </motion.div>
     </>
