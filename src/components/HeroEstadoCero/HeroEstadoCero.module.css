@@ -51,7 +51,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 1.5rem;
+  padding: 0 380px 0 100px; /* right: deja espacio para AI panel + slider */
   z-index: 2;
   pointer-events: none;
 }

@@ -29,6 +29,16 @@ export function useParticleSystem(canvasRef, pausedRef) {
       THREE = await import('three');
       if (destroyed) return;
 
+      // Wait until canvas has real dimensions (avoids aspect ratio = 0/0 on first paint)
+      await new Promise((resolve) => {
+        function check() {
+          if (canvas.clientWidth > 0 && canvas.clientHeight > 0) return resolve();
+          requestAnimationFrame(check);
+        }
+        check();
+      });
+      if (destroyed) return;
+
       const PARTICLE_COUNT = getParticleCount();
       const RADIUS = 10;
 
