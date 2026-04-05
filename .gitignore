@@ -3,4 +3,5 @@ dist/
 .env
 .DS_Store
 *.local
-public/assets/videos/
+# Local Netlify folder
+.netlify
