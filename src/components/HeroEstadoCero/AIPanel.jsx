@@ -67,7 +67,7 @@ const AIPanel = forwardRef(function AIPanel({ onMorphStart, onInterrupt }, ref) 
     try {
       const raw = await fetchWithRetry(text);
       setResult(formatResult(raw));
-      onMorphStart?.(65); // animate to semi-order
+      onMorphStart?.(100); // animate to Estado Cero
     } catch {
       setError('Servicio temporalmente no disponible.');
     } finally {

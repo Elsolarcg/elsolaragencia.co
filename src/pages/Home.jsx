@@ -34,22 +34,6 @@ function Reframe() {
               </p>
             </div>
           </div>
-
-          <div className="card-depth rounded-sm overflow-hidden relative min-h-[360px] flex items-center justify-center">
-            <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 opacity-[0.06]">
-              {[...Array(64)].map((_, i) => (
-                <div key={i} className="border border-[var(--text-main)]" />
-              ))}
-            </div>
-            <div className="z-10 text-center p-10 bg-[var(--bg-main)] border border-[var(--border-color)] shadow-xl">
-              <p className="text-3xl font-light mb-3 text-[var(--text-main)] font-space flex items-center gap-4">
-                Ruido <ArrowRight size={20} className="text-[var(--text-muted)]" /> Claridad
-              </p>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--text-muted)]">
-                Transformación sistemática
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
